@@ -4,15 +4,20 @@
 
 $ErrorActionPreference = "Stop"
 $repoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+[Console]::OutputEncoding = $utf8NoBom
+$OutputEncoding = $utf8NoBom
+$env:PYTHONUTF8 = "1"
+$env:PYTHONIOENCODING = "utf-8"
 
 $pythonCommand = $null
 $pythonPrefix = @()
-if (Get-Command py -ErrorAction SilentlyContinue) {
+if (Get-Command python -ErrorAction SilentlyContinue) {
+    $pythonCommand = (Get-Command python).Source
+}
+elseIf (Get-Command py -ErrorAction SilentlyContinue) {
     $pythonCommand = (Get-Command py).Source
     $pythonPrefix = @("-3")
-}
-elseIf (Get-Command python -ErrorAction SilentlyContinue) {
-    $pythonCommand = (Get-Command python).Source
 }
 elseIf (Get-Command python3 -ErrorAction SilentlyContinue) {
     $pythonCommand = (Get-Command python3).Source
