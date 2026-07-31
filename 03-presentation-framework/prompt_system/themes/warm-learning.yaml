@@ -1,0 +1,51 @@
+id: warm-learning
+display_name: 暖色學習工作坊
+
+visual_base:
+  background_style: 暖白底，搭配淡米色漸層與低對比紙張紋理
+  background_color: "#F7F3EA"
+
+  color_palette:
+    primary:
+      hex: "#253238"
+      use: 主標、正文與主要流程節點
+    secondary:
+      hex: "#66756F"
+      use: 次要文字、連接線與邊框
+    accent:
+      hex: "#E58B6B"
+      use: 小面積重點、步驟編號與關鍵標記
+    support:
+      - hex: "#D8E2D5"
+        use: 次要卡片與柔和背景色塊
+
+  typography:
+    heading:
+      family: "Noto Sans TC"
+      weight: "bold"
+      size_hint: "清楚、有教學現場感，不追求壓迫式大字"
+    body:
+      family: "Noto Sans TC"
+      weight: "regular"
+      size_hint: "適合投影閱讀，保持充足行距"
+
+  illustration_style:
+    default: "線條圖示"
+    note: "使用簡單一致的線條圖示輔助流程，不建立第二視覺主角。"
+
+  mood:
+    - 清楚
+    - 溫暖
+    - 可執行
+
+decoration_vocabulary:
+  - name: soft-grid
+    visual: 低對比點陣或格線
+    placement: 背景與角落
+  - name: workshop-mark
+    visual: 手寫感短線與小圓點
+    placement: 步驟編號附近
+
+closing_statement: >
+  讓讀者第一眼看懂順序，第二眼讀懂每一步；裝飾只支援理解，不與內容競爭。
+

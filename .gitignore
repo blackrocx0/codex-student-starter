@@ -1,0 +1,34 @@
+# Student-local state
+02-schedule-assistant/preferences.yaml
+02-schedule-assistant/.schedule-init.json
+
+# Secrets and environment
+.env
+.env.*
+!.env.example
+secrets/
+**/secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Generated output
+01-llm-wiki/output/*
+!01-llm-wiki/output/.gitkeep
+02-schedule-assistant/plans/*
+!02-schedule-assistant/plans/.gitkeep
+03-presentation-framework/output/*
+!03-presentation-framework/output/.gitkeep
+
+# Runtime and tooling
+__pycache__/
+*.pyc
+.pytest_cache/
+.cache/
+.codex-log/
+node_modules/
+dist/
+build/
+.DS_Store
+Thumbs.db

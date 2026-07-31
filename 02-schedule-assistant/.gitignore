@@ -1,0 +1,10 @@
+preferences.yaml
+.schedule-init.json
+plans/*
+!plans/.gitkeep
+secrets/
+.env
+.env.*
+__pycache__/
+*.pyc
+.cache/
