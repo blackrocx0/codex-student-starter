@@ -100,7 +100,7 @@ def main() -> int:
     else:
         for url in external_links:
             print(f"- {url}")
-        print("未執行線上存取；如需驗證，取得網路授權後使用 python link_check.py --online。")
+        print("未執行線上存取；取得網路授權後，Windows 使用 check.ps1 -Online，macOS 使用 sh ./check.sh --online。")
 
     return 1 if missing else 0
 

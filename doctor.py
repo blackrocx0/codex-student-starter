@@ -3,16 +3,35 @@
 
 from __future__ import annotations
 
+import platform
 import shutil
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from typing import Optional
 
 
 ROOT = Path(__file__).resolve().parent
 EXPECTED_PROJECTS = {
-    "01-llm-wiki": [
+    "01-work-program": [
+        "AGENTS.md",
+        "README.md",
+        ".agents/skills/schedule-planning/SKILL.md",
+        "preferences.example.yaml",
+        "pending_items.md",
+        "scripts/bootstrap.py",
+        "scripts/bootstrap.ps1",
+        "scripts/bootstrap.sh",
+    ],
+    "02-presentation-design": [
+        "AGENTS.md",
+        "README.md",
+        ".agents/skills/presentation-yaml/SKILL.md",
+        "examples/demo-process-flow.assembled.yaml",
+        "scripts/validate_slide_yaml.py",
+    ],
+    "03-llm-wiki": [
         "AGENTS.md",
         "README.md",
         ".agents/skills/wiki-ingest/SKILL.md",
@@ -20,36 +39,26 @@ EXPECTED_PROJECTS = {
         "wiki/index.md",
         "wiki/log.md",
     ],
-    "02-schedule-assistant": [
-        "AGENTS.md",
-        "README.md",
-        ".agents/skills/schedule-planning/SKILL.md",
-        "preferences.example.yaml",
-        "pending_items.md",
-        "scripts/bootstrap.py",
-    ],
-    "03-presentation-framework": [
-        "AGENTS.md",
-        "README.md",
-        ".agents/skills/presentation-yaml/SKILL.md",
-        "examples/demo-process-flow.assembled.yaml",
-        "scripts/validate_slide_yaml.py",
-    ],
 }
 ROOT_FILES = (
+    ".gitattributes",
     "AGENTS.md",
     "README.md",
     "INSTALL.md",
     "INSTALL_PROMPT.txt",
+    "PLATFORM_SUPPORT.md",
     "PERMISSIONS.md",
     "PROJECTS.md",
     "SECURITY.md",
+    "check.ps1",
+    "check.sh",
     "link_check.py",
     "security_scan.py",
 )
+MIN_PYTHON = (3, 9)
 
 
-def command_version(command: str) -> str | None:
+def command_version(command: str) -> Optional[str]:
     executable = shutil.which(command)
     if not executable:
         return None
@@ -72,10 +81,17 @@ def command_version(command: str) -> str | None:
 def main() -> int:
     failures: list[str] = []
     warnings: list[str] = []
+    system_name = platform.system() or "Unknown"
 
     print("Codex 學員框架安裝檢查")
     print(f"- 目前根目錄：{ROOT}")
+    print(f"- 作業系統：{system_name} ({platform.machine() or 'unknown architecture'})")
     print(f"- Python：{sys.version.split()[0]}")
+
+    if sys.version_info < MIN_PYTHON:
+        failures.append("需要 Python 3.9+；請勿由框架自動安裝。")
+    if system_name not in {"Windows", "Darwin"}:
+        warnings.append("主要驗證平台為 Windows 與 macOS；目前平台以 POSIX 相容模式執行。")
 
     for filename in ROOT_FILES:
         if not (ROOT / filename).is_file():
@@ -97,11 +113,17 @@ def main() -> int:
     )
     expected_directories = sorted(EXPECTED_PROJECTS)
     if visible_directories != expected_directories:
-        failures.append(
-            "可見資料夾不符合預期：" + ", ".join(visible_directories or ["<none>"])
-        )
+        failures.append("可見資料夾不符合預期：" + ", ".join(visible_directories or ["<none>"]))
 
-    for obsolete in ("00-start-here", "modules", ".agents", "student-profile.yaml"):
+    for obsolete in (
+        "00-start-here",
+        "modules",
+        ".agents",
+        "student-profile.yaml",
+        "01-llm-wiki",
+        "02-schedule-assistant",
+        "03-presentation-framework",
+    ):
         if (ROOT / obsolete).exists():
             failures.append(f"根目錄仍有舊版或混合架構殘留：{obsolete}")
 
@@ -152,8 +174,8 @@ def main() -> int:
             print(f"- {failure}")
         return 1
 
-    print("結果：三個專案結構完整且彼此隔離。")
-    print("下一步：執行 security_scan.py 與 link_check.py，再請使用者選擇一個專案資料夾。")
+    print("結果：三個專案結構完整、順序正確且彼此隔離。")
+    print("下一步：請使用者依序從 01、02、03 選擇一個專案資料夾。")
     return 0
 
 

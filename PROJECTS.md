@@ -1,10 +1,10 @@
 # 選擇專案
 
-| 想完成的工作 | 在 Codex 選擇的資料夾 |
-|---|---|
-| 匯入文章、整理知識、查詢 Wiki | `01-llm-wiki` |
-| 排待辦、拆專案、建立行程草案 | `02-schedule-assistant` |
-| 製作投影片 YAML、Theme 或 Layout | `03-presentation-framework` |
+| 順序 | 想完成的工作 | 在 Codex 選擇的資料夾 |
+|---|---|---|
+| 1. 工作程式 | 排待辦、拆工作、建立行程草案 | `01-work-program` |
+| 2. 簡報設計 | 製作投影片 YAML、Theme 或 Layout | `02-presentation-design` |
+| 3. LLM-WIKI | 匯入文章、整理知識、查詢 Wiki | `03-llm-wiki` |
 
 ## 切換方式
 

@@ -1,0 +1,24 @@
+schema_version: 1
+
+raw_sources:
+  directory: "raw"
+  immutable: true
+  supported_text_formats:
+    - ".md"
+    - ".txt"
+
+wiki:
+  directory: "wiki"
+  filename_style: "kebab-case"
+  index_file: "index.md"
+  log_file: "log.md"
+  uncertain_marker: "> ⚠️ 待確認："
+  cross_link_style: "markdown-relative-link"
+
+logging:
+  format: "[YYYY-MM-DD] [ACTION] description"
+  actions:
+    - "INGEST"
+    - "QUERY"
+    - "UPDATE"
+    - "LINT"

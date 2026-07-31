@@ -1,0 +1,49 @@
+name: Cross-platform checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.9"
+      - name: Run root checks
+        shell: powershell
+        run: .\check.ps1
+      - name: Test work program bootstrap
+        shell: powershell
+        run: |
+          python .\01-work-program\scripts\bootstrap.py
+          powershell -ExecutionPolicy Bypass -File .\01-work-program\scripts\bootstrap.ps1
+      - name: Validate presentation example
+        shell: powershell
+        run: python .\02-presentation-design\scripts\validate_slide_yaml.py .\02-presentation-design\examples\demo-process-flow.assembled.yaml
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.9"
+      - name: Check POSIX shell syntax
+        run: |
+          sh -n ./check.sh
+          sh -n ./01-work-program/scripts/bootstrap.sh
+      - name: Run root checks
+        run: sh ./check.sh
+      - name: Test work program bootstrap
+        run: |
+          python3 ./01-work-program/scripts/bootstrap.py
+          sh ./01-work-program/scripts/bootstrap.sh
+      - name: Validate presentation example
+        run: python3 ./02-presentation-design/scripts/validate_slide_yaml.py ./02-presentation-design/examples/demo-process-flow.assembled.yaml

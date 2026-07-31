@@ -1,21 +1,27 @@
-# 資安與隱私
+# 資安與示範資料原則
 
-## Repository 不可包含
+## Repository 不應包含
 
-- API key、OAuth token、App Password、Session cookie。
-- 私人信箱、電話、住址、證件或付款資料。
-- 真實客戶名單、未公開行程、會議連結或郵件內容。
-- 個人電腦的絕對路徑。
-- 講師歷史成品、部署帳號與 runtime log。
+- `.env`、API key、OAuth token、Cookie、私人金鑰。
+- 真實信箱、電話、地址、Calendar ID 或付款資訊。
+- 個人課程、客戶或公司內部資料。
+- 固定的 Windows 磁碟路徑或 macOS 使用者目錄。
+- 可識別原作者個人成品的大型輸出或歷史 archive。
 
-## 安裝時
+## 發布前檢查
 
-- clone 前確認資料夾空白，避免覆蓋或混入既有資料。
-- 使用 `git remote -v` 核對下載來源。
-- 執行 `python security_scan.py` 掃描剛下載的完整框架。
-- 執行 `python link_check.py` 檢查本地文件連結。
-- 外部網址預設只列出；需要線上存取測試時另外請求權限。
+Windows：
 
-## 日後使用
+```powershell
+powershell -ExecutionPolicy Bypass -File .\check.ps1
+```
 
-每個實際專案都有自己的 `scripts/security_scan.py`。發布前先開啟精確專案資料夾，再執行掃描與人工 Git diff 檢查。
+macOS：
+
+```sh
+sh ./check.sh
+```
+
+另外人工檢查 `.gitignore`、Git staged diff 與大型檔案。若發現真實憑證，不能只刪檔；先撤銷或輪換，再處理 Git 歷史。
+
+所有 sample 使用 `DEMO-*`、`example.com`、固定假日期或明確的 placeholder。AI 不得把示範資料當成學員的真實偏好或工作內容。

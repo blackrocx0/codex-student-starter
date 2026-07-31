@@ -1,6 +1,6 @@
 # Student-local state
-02-schedule-assistant/preferences.yaml
-02-schedule-assistant/.schedule-init.json
+01-work-program/preferences.yaml
+01-work-program/.schedule-init.json
 
 # Secrets and environment
 .env
@@ -14,12 +14,12 @@ secrets/
 *.pfx
 
 # Generated output
-01-llm-wiki/output/*
-!01-llm-wiki/output/.gitkeep
-02-schedule-assistant/plans/*
-!02-schedule-assistant/plans/.gitkeep
-03-presentation-framework/output/*
-!03-presentation-framework/output/.gitkeep
+03-llm-wiki/output/*
+!03-llm-wiki/output/.gitkeep
+01-work-program/plans/*
+!01-work-program/plans/.gitkeep
+02-presentation-design/output/*
+!02-presentation-design/output/.gitkeep
 
 # Runtime and tooling
 __pycache__/

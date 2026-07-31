@@ -1,0 +1,21 @@
+schema_version: 1
+
+timezone: ""
+work_days: []
+work_hours:
+  start: ""
+  end: ""
+
+focus_block_minutes: 50
+buffer_minutes: 10
+
+protected_times: []
+
+external_sync:
+  calendar_enabled: false
+  email_enabled: false
+  calendar_name: ""
+
+daily_brief:
+  enabled: false
+  preferred_time: ""

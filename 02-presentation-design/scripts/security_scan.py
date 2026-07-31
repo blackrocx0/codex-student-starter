@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parent.parent
 SELF = Path(__file__).resolve()
 MAX_FILE_SIZE = 2 * 1024 * 1024
 
